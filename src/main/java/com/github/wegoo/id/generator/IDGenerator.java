@@ -11,11 +11,10 @@ import java.util.Set;
 public class IDGenerator {
 
   //生成身份中号中,最大年龄限制
-  final static int old = 65;
+  int old = 65;
 
   //起始时间
-  final static int BaseAge = LocalDate.now().getYear()-old;
-
+  int BaseAge = 1949;
 
   final static char[] PARITYBIT = {'1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'};
 
@@ -23,10 +22,24 @@ public class IDGenerator {
 
 
   private JsonWrapper wrapper;
+
+  /**
+   * @author wegoo
+   * @description IDGenerator
+   * @param [wrapper, maxAge]
+   *       json转换实现, 身份证中最大年龄
+   * @date 2024/4/19  17:26
+   * @since: 1.0.0
+   */
+  public IDGenerator(JsonWrapper wrapper, int maxAge) {
+    this.wrapper = wrapper;
+    this.old = LocalDate.now().getYear() - maxAge;
+  }
+
+
   public IDGenerator(JsonWrapper wrapper) {
     this.wrapper = wrapper;
   }
-
 
 //  private IDGenerator() {}
 
@@ -76,16 +89,14 @@ public class IDGenerator {
   }
 
 
-
-  public static String getID(String id){
+  public static String getID(String id) {
     String[] split = id.split("");
     int result = 0;
     for (int i = 0; i < POWER_LIST.length; i++) {
       result += Integer.parseInt(split[i]) * POWER_LIST[i];
     }
-    return id+ PARITYBIT[result % 11];
+    return id + PARITYBIT[result % 11];
   }
-
 
 
 }
