@@ -1,9 +1,9 @@
-package com.github.wegoo.id.generator;
+package com.github.wegoo.test;
 
+import com.github.wegoo.id.generator.JsonWrapper;
 import com.google.gson.Gson;
 
-public class GsonWrapper implements JsonWrapper{
-
+public class GsonWrapper implements JsonWrapper {
 
   @Override
   public String parseStringFromObject(Object obj) {
